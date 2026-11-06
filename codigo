@@ -1,0 +1,115 @@
+import discord
+import os
+import random
+
+# La variable intents almacena los privilegios del bot
+intents = discord.Intents.default()
+
+# Activar el privilegio de lectura de mensajes
+intents.message_content = True
+ 
+# Crear el bot en la variable cliente y transferirle los privilegios
+client = discord.Client(intents=intents)
+
+
+# Datos sobre el agua
+datos_agua = [
+    "Algunos centros de datos utilizan agua para refrigerar sus equipos.",
+    "La cantidad de agua utilizada depende de la tecnología de refrigeración.",
+    "Producir electricidad puede requerir agua, dependiendo de la fuente de energía.",
+    "La energía solar suele necesitar menos agua durante su funcionamiento que algunas centrales térmicas.",
+    "Ahorrar electricidad también puede ayudar a reducir el consumo de agua asociado a su producción.",
+    "El agua dulce es un recurso esencial para las personas, los animales y las plantas.",
+    "La refrigeración de los equipos informáticos ayuda a evitar el sobrecalentamiento.",
+    "Algunos centros de datos utilizan sistemas de refrigeración que reducen el consumo de agua.",
+    "La escasez de agua afecta a muchas comunidades en distintas partes del mundo.",
+    "Cuidar el agua en casa y en el colegio ayuda a proteger este recurso natural."
+]
+
+# Datos sobre el cambio climático
+datos_clima = [
+    "El cambio climático actual se debe principalmente a las actividades humanas.",
+    "El dióxido de carbono es uno de los principales gases de efecto invernadero.",
+    "La quema de carbón, petróleo y gas libera gases de efecto invernadero.",
+    "La deforestación reduce la cantidad de árboles que pueden absorber dióxido de carbono.",
+    "El calentamiento global contribuye al aumento del nivel del mar.",
+    "El cambio climático puede aumentar la frecuencia o intensidad de algunos fenómenos extremos.",
+    "Las energías renovables pueden ayudar a reducir las emisiones de gases de efecto invernadero.",
+    "Los océanos absorben gran parte del exceso de calor del planeta.",
+    "Proteger los bosques ayuda a conservar la biodiversidad y almacenar carbono.",
+    "Ahorrar energía es una forma de contribuir a la reducción de emisiones."
+]
+
+# Datos sobre la inteligencia artificial
+datos_ia = [
+    "La inteligencia artificial funciona en equipos informáticos que necesitan electricidad.",
+    "Entrenar algunos modelos de IA puede consumir grandes cantidades de energía.",
+    "El impacto ambiental de la IA depende del modelo, el uso y la fuente de electricidad.",
+    "Los centros de datos necesitan sistemas para mantener sus equipos a una temperatura adecuada.",
+    "Usar energía renovable puede reducir las emisiones asociadas a los sistemas de IA.",
+    "No todas las consultas de IA consumen la misma cantidad de energía.",
+    "Crear y utilizar equipos informáticos requiere materiales y recursos naturales.",
+    "Algunos sistemas de IA pueden ayudar a estudiar el clima y analizar datos ambientales.",
+    "La IA puede ayudar a detectar cambios en los bosques mediante imágenes satelitales.",
+    "Utilizar la IA de forma responsable significa aprovecharla cuando realmente resulta útil."
+]
+
+# Consejos y soluciones ambientales
+datos_soluciones = [
+    "Apaga las luces cuando no las necesites.",
+    "Desconecta los cargadores cuando no estén en uso, si es seguro hacerlo.",
+    "Reutiliza cuadernos y materiales escolares siempre que puedas.",
+    "Separa los residuos según las normas de reciclaje de tu localidad.",
+    "Cierra la llave mientras te cepillas los dientes.",
+    "Camina, usa bicicleta o transporte público cuando sea posible y seguro.",
+    "Evita comprar productos que no necesitas.",
+    "Cuida los árboles y las zonas verdes de tu comunidad.",
+    "Aprovecha la luz natural durante el día.",
+    "Comparte información ambiental confiable para ayudar a crear conciencia."
+]
+
+
+@client.event
+async def on_ready():
+    print(f'Hemos iniciado sesión como {client.user}')
+
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$hello'):
+        await message.channel.send('¡Hola! Soy el bot ecológico TerraIA ')
+
+    elif message.content.startswith('$ayuda'):
+        await message.channel.send(
+            'Aquí tienes algunos comandos para seguir aprendiendo juntos sobre nuestro planeta, Comandos: $hello, $ayuda, $objetivo, $agua, $ia, $clima y $soluciones'
+        )
+
+    elif message.content.startswith('$objetivo'):
+        await message.channel.send(
+            '¡Hola! Soy TerraIA , un bot ecológico que te ayudará a '
+            'aprender sobre el impacto ambiental de la inteligencia artificial, '
+            'el consumo de agua, el cambio climático y las soluciones que podemos '
+            'aplicar para cuidar nuestro planeta. ¡Aprendamos juntos a construir '
+            'un futuro más sostenible! '
+        )
+
+    elif message.content.startswith('$agua'):
+        dato = random.choice(datos_agua)
+        await message.channel.send(f' Dato sobre el agua: {dato}')
+
+    elif message.content.startswith('$ia'):
+        dato = random.choice(datos_ia)
+        await message.channel.send(f' Dato sobre la IA: {dato}')
+
+    elif message.content.startswith('$clima'):
+        dato = random.choice(datos_clima)
+        await message.channel.send(f' Dato sobre el clima: {dato}')
+
+    elif message.content.startswith('$soluciones'):
+        dato = random.choice(datos_soluciones)
+        await message.channel.send(f' Consejo ecológico: {dato}')
+
+client.run('MTQ3NTk3MTkxMTM2MzA3MjE1Mw.G_hRSg.YkLhMrM6p1d4UzoFGvV1OV6TcjqoKNYUGLOVVk')
